@@ -1,0 +1,46 @@
+{
+  "phases": [
+    {
+      "phase": 1,
+      "title": "Probability you can see",
+      "module_start": 1,
+      "module_end": 4,
+      "learning_goal": "Build visible, manipulable intuition for probability you can see."
+    },
+    {
+      "phase": 2,
+      "title": "Sampling and inference",
+      "module_start": 5,
+      "module_end": 8,
+      "learning_goal": "Build visible, manipulable intuition for sampling and inference."
+    },
+    {
+      "phase": 3,
+      "title": "Regression and estimation",
+      "module_start": 9,
+      "module_end": 12,
+      "learning_goal": "Build visible, manipulable intuition for regression and estimation."
+    },
+    {
+      "phase": 4,
+      "title": "Detection and decisions",
+      "module_start": 13,
+      "module_end": 16,
+      "learning_goal": "Build visible, manipulable intuition for detection and decisions."
+    },
+    {
+      "phase": 5,
+      "title": "Time series and state estimation",
+      "module_start": 17,
+      "module_end": 20,
+      "learning_goal": "Build visible, manipulable intuition for time series and state estimation."
+    },
+    {
+      "phase": 6,
+      "title": "Engineering statistics",
+      "module_start": 21,
+      "module_end": 24,
+      "learning_goal": "Build visible, manipulable intuition for engineering statistics."
+    }
+  ]
+}

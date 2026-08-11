@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "product": "stats-estimation-learning",
+  "title": "Probability, Statistics, Estimation, and Detection",
+  "purpose": "Build statistical intuition for noisy measurements, estimation, detection, test data, and engineering decisions.",
+  "module_count": 24,
+  "progression_rule": "Complete modules in order until the first six are complete; later modules may be selected when their prerequisites are met.",
+  "interaction_contract": {
+    "environment": "MATLAB",
+    "notebook_format": "MATLAB scripts with %% Live Editor cells",
+    "lever_ui": "uifigure controls",
+    "required_sweeps": 2,
+    "required_broken_cases": 1,
+    "randomness": "seeded",
+    "base_matlab_preferred": true,
+    "learning_cycle": [
+      "read",
+      "visualize-baseline",
+      "move-one-lever",
+      "visualize-delta",
+      "read-and-explain"
+    ]
+  },
+  "modules": [
+    {
+      "number": 1,
+      "id": "P01",
+      "title": "Watch Randomness Stabilize with Repetition",
+      "guiding_question": "What does repetition reveal about random variation?",
+      "phase": 1,
+      "phase_title": "Probability you can see",
+      "slug": "watch-randomness-stabilize-with-repetition",
+      "folder": "modules/01-watch-randomness-stabilize-with-repetition",
+      "status": "implemented",
+      "implementation_batch": "P01",
+      "prerequisites": [],
+      "evidence_level": "simulated"
+    },
+    {
+      "number": 2,
+      "id": "P02",
+      "title": "Turn Random Variables into Histograms",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you turn Random Variables into Histograms?",
+      "phase": 1,
+      "phase_title": "Probability you can see",
+      "slug": "turn-random-variables-into-histograms",
+      "folder": "modules/02-turn-random-variables-into-histograms",
+      "status": "scaffolded",
+      "implementation_batch": "P02",
+      "prerequisites": [
+        "P01"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 3,
+      "id": "P03",
+      "title": "See Covariance as Shared Motion",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you see Covariance as Shared Motion?",
+      "phase": 1,
+      "phase_title": "Probability you can see",
+      "slug": "see-covariance-as-shared-motion",
+      "folder": "modules/03-see-covariance-as-shared-motion",
+      "status": "scaffolded",
+      "implementation_batch": "P03",
+      "prerequisites": [
+        "P02"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 4,
+      "id": "P04",
+      "title": "Update Beliefs with Bayes' Rule",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you update Beliefs with Bayes' Rule?",
+      "phase": 1,
+      "phase_title": "Probability you can see",
+      "slug": "update-beliefs-with-bayes-rule",
+      "folder": "modules/04-update-beliefs-with-bayes-rule",
+      "status": "scaffolded",
+      "implementation_batch": "P04",
+      "prerequisites": [
+        "P03"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 5,
+      "id": "P05",
+      "title": "Watch the Sample Mean Converge",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you watch the Sample Mean Converge?",
+      "phase": 2,
+      "phase_title": "Sampling and inference",
+      "slug": "watch-the-sample-mean-converge",
+      "folder": "modules/05-watch-the-sample-mean-converge",
+      "status": "scaffolded",
+      "implementation_batch": "P05",
+      "prerequisites": [
+        "P04"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 6,
+      "id": "P06",
+      "title": "Make the Central Limit Theorem Visible",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you make the Central Limit Theorem Visible?",
+      "phase": 2,
+      "phase_title": "Sampling and inference",
+      "slug": "make-the-central-limit-theorem-visible",
+      "folder": "modules/06-make-the-central-limit-theorem-visible",
+      "status": "scaffolded",
+      "implementation_batch": "P06",
+      "prerequisites": [
+        "P05"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 7,
+      "id": "P07",
+      "title": "Build and Interpret Confidence Intervals",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you build and Interpret Confidence Intervals?",
+      "phase": 2,
+      "phase_title": "Sampling and inference",
+      "slug": "build-and-interpret-confidence-intervals",
+      "folder": "modules/07-build-and-interpret-confidence-intervals",
+      "status": "scaffolded",
+      "implementation_batch": "P07",
+      "prerequisites": [
+        "P06"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 8,
+      "id": "P08",
+      "title": "Test a Claim Without Confusing Significance and Importance",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you test a Claim Without Confusing Significance and Importance?",
+      "phase": 2,
+      "phase_title": "Sampling and inference",
+      "slug": "test-a-claim-without-confusing-significance-and-importance",
+      "folder": "modules/08-test-a-claim-without-confusing-significance-and-importance",
+      "status": "scaffolded",
+      "implementation_batch": "P08",
+      "prerequisites": [
+        "P07"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 9,
+      "id": "P09",
+      "title": "Fit a Line with Least Squares",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you fit a Line with Least Squares?",
+      "phase": 3,
+      "phase_title": "Regression and estimation",
+      "slug": "fit-a-line-with-least-squares",
+      "folder": "modules/09-fit-a-line-with-least-squares",
+      "status": "scaffolded",
+      "implementation_batch": "P09",
+      "prerequisites": [
+        "P08"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 10,
+      "id": "P10",
+      "title": "Estimate Parameters by Maximum Likelihood",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you estimate Parameters by Maximum Likelihood?",
+      "phase": 3,
+      "phase_title": "Regression and estimation",
+      "slug": "estimate-parameters-by-maximum-likelihood",
+      "folder": "modules/10-estimate-parameters-by-maximum-likelihood",
+      "status": "scaffolded",
+      "implementation_batch": "P10",
+      "prerequisites": [
+        "P09"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 11,
+      "id": "P11",
+      "title": "Combine Prior Knowledge with Data",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you combine Prior Knowledge with Data?",
+      "phase": 3,
+      "phase_title": "Regression and estimation",
+      "slug": "combine-prior-knowledge-with-data",
+      "folder": "modules/11-combine-prior-knowledge-with-data",
+      "status": "scaffolded",
+      "implementation_batch": "P11",
+      "prerequisites": [
+        "P10"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 12,
+      "id": "P12",
+      "title": "See Regularization Trade Bias for Variance",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you see Regularization Trade Bias for Variance?",
+      "phase": 3,
+      "phase_title": "Regression and estimation",
+      "slug": "see-regularization-trade-bias-for-variance",
+      "folder": "modules/12-see-regularization-trade-bias-for-variance",
+      "status": "scaffolded",
+      "implementation_batch": "P12",
+      "prerequisites": [
+        "P11"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 13,
+      "id": "P13",
+      "title": "Move a Threshold Along an ROC Curve",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you move a Threshold Along an ROC Curve?",
+      "phase": 4,
+      "phase_title": "Detection and decisions",
+      "slug": "move-a-threshold-along-an-roc-curve",
+      "folder": "modules/13-move-a-threshold-along-an-roc-curve",
+      "status": "scaffolded",
+      "implementation_batch": "P13",
+      "prerequisites": [
+        "P12"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 14,
+      "id": "P14",
+      "title": "Detect a Known Signal in Noise",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you detect a Known Signal in Noise?",
+      "phase": 4,
+      "phase_title": "Detection and decisions",
+      "slug": "detect-a-known-signal-in-noise",
+      "folder": "modules/14-detect-a-known-signal-in-noise",
+      "status": "scaffolded",
+      "implementation_batch": "P14",
+      "prerequisites": [
+        "P13"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 15,
+      "id": "P15",
+      "title": "Find a Change Point in a Data Stream",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you find a Change Point in a Data Stream?",
+      "phase": 4,
+      "phase_title": "Detection and decisions",
+      "slug": "find-a-change-point-in-a-data-stream",
+      "folder": "modules/15-find-a-change-point-in-a-data-stream",
+      "status": "scaffolded",
+      "implementation_batch": "P15",
+      "prerequisites": [
+        "P14"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 16,
+      "id": "P16",
+      "title": "Control False Discoveries Across Many Tests",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you control False Discoveries Across Many Tests?",
+      "phase": 4,
+      "phase_title": "Detection and decisions",
+      "slug": "control-false-discoveries-across-many-tests",
+      "folder": "modules/16-control-false-discoveries-across-many-tests",
+      "status": "scaffolded",
+      "implementation_batch": "P16",
+      "prerequisites": [
+        "P15"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 17,
+      "id": "P17",
+      "title": "Reveal Correlation Across Time",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you reveal Correlation Across Time?",
+      "phase": 5,
+      "phase_title": "Time series and state estimation",
+      "slug": "reveal-correlation-across-time",
+      "folder": "modules/17-reveal-correlation-across-time",
+      "status": "scaffolded",
+      "implementation_batch": "P17",
+      "prerequisites": [
+        "P16"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 18,
+      "id": "P18",
+      "title": "Build an Autoregressive Process",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you build an Autoregressive Process?",
+      "phase": 5,
+      "phase_title": "Time series and state estimation",
+      "slug": "build-an-autoregressive-process",
+      "folder": "modules/18-build-an-autoregressive-process",
+      "status": "scaffolded",
+      "implementation_batch": "P18",
+      "prerequisites": [
+        "P17"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 19,
+      "id": "P19",
+      "title": "Track a Hidden State with a Kalman Filter",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you track a Hidden State with a Kalman Filter?",
+      "phase": 5,
+      "phase_title": "Time series and state estimation",
+      "slug": "track-a-hidden-state-with-a-kalman-filter",
+      "folder": "modules/19-track-a-hidden-state-with-a-kalman-filter",
+      "status": "scaffolded",
+      "implementation_batch": "P19",
+      "prerequisites": [
+        "P18"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 20,
+      "id": "P20",
+      "title": "Approximate a Nonlinear Posterior with Particles",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you approximate a Nonlinear Posterior with Particles?",
+      "phase": 5,
+      "phase_title": "Time series and state estimation",
+      "slug": "approximate-a-nonlinear-posterior-with-particles",
+      "folder": "modules/20-approximate-a-nonlinear-posterior-with-particles",
+      "status": "scaffolded",
+      "implementation_batch": "P20",
+      "prerequisites": [
+        "P19"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 21,
+      "id": "P21",
+      "title": "Propagate Measurement Uncertainty",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you propagate Measurement Uncertainty?",
+      "phase": 6,
+      "phase_title": "Engineering statistics",
+      "slug": "propagate-measurement-uncertainty",
+      "folder": "modules/21-propagate-measurement-uncertainty",
+      "status": "scaffolded",
+      "implementation_batch": "P21",
+      "prerequisites": [
+        "P20"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 22,
+      "id": "P22",
+      "title": "Design an Efficient Experiment",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you design an Efficient Experiment?",
+      "phase": 6,
+      "phase_title": "Engineering statistics",
+      "slug": "design-an-efficient-experiment",
+      "folder": "modules/22-design-an-efficient-experiment",
+      "status": "scaffolded",
+      "implementation_batch": "P22",
+      "prerequisites": [
+        "P21"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 23,
+      "id": "P23",
+      "title": "Model Reliability and Time to Failure",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you model Reliability and Time to Failure?",
+      "phase": 6,
+      "phase_title": "Engineering statistics",
+      "slug": "model-reliability-and-time-to-failure",
+      "folder": "modules/23-model-reliability-and-time-to-failure",
+      "status": "scaffolded",
+      "implementation_batch": "P23",
+      "prerequisites": [
+        "P22"
+      ],
+      "evidence_level": "none"
+    },
+    {
+      "number": 24,
+      "id": "P24",
+      "title": "Run a Monte Carlo Engineering Trade Study",
+      "guiding_question": "What inputs, observable effects, and failure modes matter when you run a Monte Carlo Engineering Trade Study?",
+      "phase": 6,
+      "phase_title": "Engineering statistics",
+      "slug": "run-a-monte-carlo-engineering-trade-study",
+      "folder": "modules/24-run-a-monte-carlo-engineering-trade-study",
+      "status": "scaffolded",
+      "implementation_batch": "P24",
+      "prerequisites": [
+        "P23"
+      ],
+      "evidence_level": "none"
+    }
+  ]
+}
