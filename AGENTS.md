@@ -36,7 +36,7 @@ This repository is the **Probability, Statistics, Estimation, and Detection** in
 ## Governed agentic delivery
 
 - Product: `stats-estimation-learning`; delivery profile: `product-data`.
-- Control revision: `35a09aca04b4f64cc97249ddd3e81e6f46faba6b`; harness version: `2`.
+- Control revision: `c60c20281fe3feb8f68248cee255f93b8c229410`; harness version: `2`.
 - Read `contracts/profile-requirements.yaml` and the approved
   `contracts/active-batch.yaml` before implementation.
 - Stay inside active-batch allowed paths and preserve every forbidden path.
