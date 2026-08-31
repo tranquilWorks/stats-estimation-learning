@@ -37,7 +37,8 @@ launch_lesson("P01")
 run_module_checks("P01")
 ```
 
-`P01` is a complete reference implementation. The remaining modules are intentionally scaffolded so each can be implemented in a bounded, reviewable batch.
+`P01` is the reference implementation and later modules advance through bounded, reviewable batches.
+Run `./bin/learn status` or `./bin/learn list` for the current implementation frontier.
 
 ## Module layout
 
