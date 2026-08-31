@@ -45,12 +45,12 @@
       "phase_title": "Probability you can see",
       "slug": "turn-random-variables-into-histograms",
       "folder": "modules/02-turn-random-variables-into-histograms",
-      "status": "scaffolded",
+      "status": "implemented",
       "implementation_batch": "P02",
       "prerequisites": [
         "P01"
       ],
-      "evidence_level": "none"
+      "evidence_level": "simulated"
     },
     {
       "number": 3,
