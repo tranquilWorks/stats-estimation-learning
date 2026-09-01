@@ -463,6 +463,67 @@ class LearnCliTests(unittest.TestCase):
             )
             self.assertTrue(p02_line.startswith("○ P02"), p02_line)
 
+    def test_p03_frontier_rollback_recovers_to_p02_and_preserves_completion(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = Path(temporary) / "repo"
+            self.create_fixture(fixture)
+            manifest_path = fixture / "curriculum/modules.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            p03 = next(module for module in manifest["modules"] if module["id"] == "P03")
+            self.assertEqual(p03["status"], "implemented")
+
+            for module in manifest["modules"]:
+                if module["number"] >= p03["number"]:
+                    module["status"] = "scaffolded"
+                    module["evidence_level"] = "none"
+            manifest_path.write_text(
+                json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+            )
+
+            state_path = fixture / ".learning/progress.json"
+            state_path.parent.mkdir(parents=True)
+            dormant_note = "P03 teach-back retained across source rollback."
+            state_path.write_text(
+                json.dumps(
+                    {
+                        "current": "P03",
+                        "completed": {"P01": True, "P02": True, "P03": True},
+                        "notes": {
+                            "P01": "P01 note",
+                            "P02": "P02 note",
+                            "P03": dormant_note,
+                        },
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            resumed = self.run_cli_in_fixture(fixture, "continue")
+            self.assertEqual(resumed.returncode, 0, resumed.stderr)
+            self.assertIn("P02 —", resumed.stdout)
+            preserved = json.loads(state_path.read_text(encoding="utf-8"))
+            self.assertEqual(preserved["current"], "P02")
+            self.assertTrue(preserved["completed"]["P03"])
+            self.assertEqual(preserved["notes"]["P03"], dormant_note)
+
+            status = self.run_cli_in_fixture(fixture, "status")
+            self.assertEqual(status.returncode, 0, status.stderr)
+            self.assertIn("2 implemented, 2 completed", status.stdout)
+            listing = self.run_cli_in_fixture(fixture, "list")
+            self.assertEqual(listing.returncode, 0, listing.stderr)
+            p03_line = next(
+                line for line in listing.stdout.splitlines() if " P03 " in line
+            )
+            self.assertTrue(p03_line.startswith("○ P03"), p03_line)
+
+            rejected = self.run_cli_in_fixture(fixture, "start", "P03")
+            self.assertEqual(rejected.returncode, 2, rejected.stderr)
+            unchanged = json.loads(state_path.read_text(encoding="utf-8"))
+            self.assertEqual(unchanged["current"], "P02")
+            self.assertTrue(unchanged["completed"]["P03"])
+            self.assertEqual(unchanged["notes"]["P03"], dormant_note)
+
     def test_status_ignores_false_and_noncanonical_completion_entries(self):
         with tempfile.TemporaryDirectory() as temporary:
             fixture = Path(temporary) / "repo"
