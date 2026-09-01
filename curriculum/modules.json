@@ -77,12 +77,12 @@
       "phase_title": "Probability you can see",
       "slug": "update-beliefs-with-bayes-rule",
       "folder": "modules/04-update-beliefs-with-bayes-rule",
-      "status": "scaffolded",
+      "status": "implemented",
       "implementation_batch": "P04",
       "prerequisites": [
         "P03"
       ],
-      "evidence_level": "none"
+      "evidence_level": "simulated"
     },
     {
       "number": 5,

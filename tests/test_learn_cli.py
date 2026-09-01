@@ -283,6 +283,49 @@ class LearnCliTests(unittest.TestCase):
             self.assertIn("Repetition stabilizes", state["notes"]["P01"])
             self.assertIn("Legacy learner note.", state["notes"]["P01"])
 
+    def test_p04_completion_command_persists_attested_teach_back(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = Path(temporary) / "repo"
+            self.create_fixture(fixture)
+            p04 = next(
+                module for module in self.manifest["modules"] if module["id"] == "P04"
+            )
+            self.assertEqual(p04["status"], "implemented")
+
+            teach_back = (
+                "Weight both alarm paths by their priors, then normalize the "
+                "observed alarm column; ignoring the base rate creates false confidence."
+            )
+            completed = self.run_cli_in_fixture(
+                fixture,
+                "complete",
+                "P04",
+                "--checks-passed",
+                "--teach-back",
+                teach_back,
+            )
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            self.assertIn("Marked P04 complete", completed.stdout)
+
+            state_path = fixture / ".learning/progress.json"
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            self.assertEqual(state["current"], "P04")
+            self.assertTrue(state["completed"]["P04"])
+            self.assertEqual(state["notes"]["P04"], teach_back)
+
+            resumed = self.run_cli_in_fixture(fixture, "continue")
+            self.assertEqual(resumed.returncode, 0, resumed.stderr)
+            self.assertIn("P04 —", resumed.stdout)
+            status = self.run_cli_in_fixture(fixture, "status")
+            self.assertEqual(status.returncode, 0, status.stderr)
+            self.assertIn("1 completed", status.stdout)
+            listing = self.run_cli_in_fixture(fixture, "list")
+            self.assertEqual(listing.returncode, 0, listing.stderr)
+            p04_line = next(
+                line for line in listing.stdout.splitlines() if " P04 " in line
+            )
+            self.assertTrue(p04_line.startswith("✓ P04"), p04_line)
+
     def test_malformed_state_is_preserved_with_a_controlled_diagnostic(self):
         with tempfile.TemporaryDirectory() as temporary:
             fixture = Path(temporary) / "repo"
@@ -523,6 +566,80 @@ class LearnCliTests(unittest.TestCase):
             self.assertEqual(unchanged["current"], "P02")
             self.assertTrue(unchanged["completed"]["P03"])
             self.assertEqual(unchanged["notes"]["P03"], dormant_note)
+
+    def test_p04_frontier_rollback_recovers_to_p03_and_preserves_completion(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture = Path(temporary) / "repo"
+            self.create_fixture(fixture)
+            manifest_path = fixture / "curriculum/modules.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            p04 = next(module for module in manifest["modules"] if module["id"] == "P04")
+            self.assertEqual(p04["status"], "implemented")
+
+            for module in manifest["modules"]:
+                if module["number"] >= p04["number"]:
+                    module["status"] = "scaffolded"
+                    module["evidence_level"] = "none"
+            manifest_path.write_text(
+                json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+            )
+
+            state_path = fixture / ".learning/progress.json"
+            state_path.parent.mkdir(parents=True)
+            dormant_note = "P04 teach-back retained across source rollback."
+            completed = {f"P{number:02d}": True for number in range(1, 5)}
+            notes = {
+                f"P{number:02d}": f"P{number:02d} note"
+                for number in range(1, 4)
+            }
+            notes["P04"] = dormant_note
+            state_path.write_text(
+                json.dumps(
+                    {
+                        "current": "P04",
+                        "completed": completed,
+                        "notes": notes,
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            resumed = self.run_cli_in_fixture(fixture, "continue")
+            self.assertEqual(resumed.returncode, 0, resumed.stderr)
+            self.assertIn("P03 —", resumed.stdout)
+            preserved = json.loads(state_path.read_text(encoding="utf-8"))
+            self.assertEqual(preserved["current"], "P03")
+            self.assertTrue(preserved["completed"]["P04"])
+            self.assertEqual(preserved["notes"]["P04"], dormant_note)
+
+            expected_implemented = sum(
+                module["status"] == "implemented" for module in manifest["modules"]
+            )
+            expected_completed = sum(
+                module["status"] == "implemented"
+                and completed.get(module["id"]) is True
+                for module in manifest["modules"]
+            )
+            status = self.run_cli_in_fixture(fixture, "status")
+            self.assertEqual(status.returncode, 0, status.stderr)
+            self.assertIn(
+                f"{expected_implemented} implemented, {expected_completed} completed",
+                status.stdout,
+            )
+            listing = self.run_cli_in_fixture(fixture, "list")
+            self.assertEqual(listing.returncode, 0, listing.stderr)
+            p04_line = next(
+                line for line in listing.stdout.splitlines() if " P04 " in line
+            )
+            self.assertTrue(p04_line.startswith("○ P04"), p04_line)
+
+            rejected = self.run_cli_in_fixture(fixture, "start", "P04")
+            self.assertEqual(rejected.returncode, 2, rejected.stderr)
+            unchanged = json.loads(state_path.read_text(encoding="utf-8"))
+            self.assertEqual(unchanged["current"], "P03")
+            self.assertTrue(unchanged["completed"]["P04"])
+            self.assertEqual(unchanged["notes"]["P04"], dormant_note)
 
     def test_status_ignores_false_and_noncanonical_completion_entries(self):
         with tempfile.TemporaryDirectory() as temporary:
