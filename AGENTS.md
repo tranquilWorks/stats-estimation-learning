@@ -35,6 +35,7 @@ This repository is the **Probability, Statistics, Estimation, and Detection** in
 <!-- BEGIN PORTFOLIO-CONTROL MANAGED -->
 ## Governed agentic delivery
 
+- Read `.agents/skills/engineering-execution/SKILL.md` for nontrivial work: complete the requested outcome, verify its entry point, and preserve context.
 - Product: `stats-estimation-learning`; delivery profile: `product-data`.
 - Control revision: `c60c20281fe3feb8f68248cee255f93b8c229410`; harness version: `2`.
 - Read `contracts/profile-requirements.yaml` and the approved
